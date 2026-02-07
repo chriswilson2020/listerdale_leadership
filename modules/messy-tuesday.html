@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Messy Tuesday Diagnostic - A Leadership Book In One Page</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css">
+  <style>
+    .path-section {
+      background: white;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 28px;
+      margin-bottom: 24px;
+      scroll-margin-top: 80px;
+    }
+    .path-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+    .path-icon {
+      font-size: 32px;
+      line-height: 1;
+    }
+    .path-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 20px;
+      color: #1e293b;
+    }
+    .path-description {
+      font-size: 15px;
+      color: #475569;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+    .diagnosis-box {
+      background: #fef3c7;
+      border: 1px solid #f59e0b;
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 20px;
+    }
+    .diagnosis-box h4 {
+      color: #92400e;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+    }
+    .diagnosis-box ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .diagnosis-box li {
+      font-size: 14px;
+      color: #78350f;
+      padding: 4px 0;
+      padding-left: 20px;
+      position: relative;
+    }
+    .diagnosis-box li::before {
+      content: "?";
+      position: absolute;
+      left: 0;
+      font-weight: 700;
+      color: #d97706;
+    }
+    .path-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .path-step {
+      display: flex;
+      gap: 16px;
+      position: relative;
+    }
+    .path-step-connector {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 40px;
+      flex-shrink: 0;
+    }
+    .path-step-number {
+      background: #0088CC;
+      color: white;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 14px;
+      z-index: 1;
+    }
+    .path-step-line {
+      width: 2px;
+      flex: 1;
+      background: #cbd5e1;
+    }
+    .path-step:last-child .path-step-line {
+      display: none;
+    }
+    .path-step-content {
+      padding-bottom: 24px;
+      flex: 1;
+    }
+    .path-step-content h4 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: #1e293b;
+      margin-bottom: 4px;
+    }
+    .path-step-content h4 a {
+      color: #0088CC;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+    .path-step-content h4 a:hover {
+      color: #006699;
+    }
+    .path-step-content p {
+      font-size: 14px;
+      color: #475569;
+      line-height: 1.5;
+    }
+    .path-step-content .focus-on {
+      background: #f0f9ff;
+      border-left: 3px solid #0088CC;
+      padding: 8px 12px;
+      margin-top: 8px;
+      font-size: 13px;
+      color: #0369a1;
+    }
+    .reality-check {
+      background: #fef2f2;
+      border: 1px solid #fca5a5;
+      border-radius: 8px;
+      padding: 16px;
+      margin-top: 16px;
+    }
+    .reality-check h4 {
+      color: #991b1b;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+    }
+    .reality-check p {
+      font-size: 14px;
+      color: #7f1d1d;
+      line-height: 1.5;
+    }
+    .triage-intro {
+      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+      border: 1px solid #7dd3fc;
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 32px;
+    }
+    .triage-intro h3 {
+      color: #0c4a6e;
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+    .triage-intro p {
+      color: #0369a1;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body class="module-page">
+  <header class="header">
+    <div class="header-content">
+      <a href="https://listerdale.nl"><img src="../images/listerdale-logo.jpg" alt="Listerdale Life Sciences" class="header-logo"></a>
+      <a href="../index.html" class="header-title">← All Modules</a>
+    </div>
+  </header>
+
+  <section class="module-hero">
+    <div class="module-hero-content">
+      <a href="../index.html" class="back-link">← Back to all modules</a>
+      <h1>The Messy Tuesday Diagnostic</h1>
+      <p class="subtitle">When to Coach, Confront, Delegate, or Redesign</p>
+      
+      <div class="attribution-box">
+        <div class="attribution-icon">🧭</div>
+        <div class="attribution-content">
+          <h4>A Navigation Layer</h4>
+          <p class="source">For the Leadership Toolbox</p>
+          <p class="description">Great tools are useless without diagnosis. This module helps you figure out what's actually going on before you reach for a framework. Start with the situation, not the solution.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="module-content">
+    
+    <div class="triage-intro">
+      <h3>How to Use This Page</h3>
+      <p>Find the scenario closest to what you're dealing with. Each path gives you a <strong>diagnosis first</strong> (what's likely going on), then a <strong>sequenced reading order</strong> through 2-3 modules. The order matters — don't skip to step 3 before doing step 1. And read the reality check at the end of each path. Not every situation has a clean fix.</p>
+    </div>
+
+    <!-- Path 1: Underperforming -->
+    <div class="path-section" id="underperforming">
+      <div class="path-header">
+        <div class="path-icon">📉</div>
+        <div class="path-title">"Someone on my team is underperforming"</div>
+      </div>
+      <p class="path-description">Before you coach, confront, or escalate — diagnose. Underperformance is a symptom, not a root cause. The fix depends entirely on whether this is a skill gap, a will gap, or a system problem.</p>
+      
+      <div class="diagnosis-box">
+        <h4>Ask yourself first</h4>
+        <ul>
+          <li>Have I been specific about what "good" looks like for this role?</li>
+          <li>Is this a recent change, or has it always been this way?</li>
+          <li>Could the environment (tools, process, team dynamics) be the real problem?</li>
+          <li>Am I frustrated because of their performance, or because of my expectations?</li>
+        </ul>
+      </div>
+
+      <div class="path-steps">
+        <div class="path-step">
+          <div class="path-step-connector">
+            <div class="path-step-number">1</div>
+            <div class="path-step-line"></div>
+          </div>
+          <div class="path-step-content">
+            <h4><a href="give-feedback.html">How to Give Feedback</a></h4>
+            <p>Start here. You can't fix what you haven't named. Use the preparation-delivery-discussion-followup framework to have the conversation.</p>
+            <div class="focus-on"><strong>Focus on:</strong> Separating the behavior from the person. Be specific about what you've observed, not what you've concluded.</div>
+          </div>
+        </div>
+        <div class="path-step">
+          <div class="path-step-connector">
+            <div class="path-step-number">2</div>
+            <div class="path-step-line"></div>
+          </div>
+          <div class="path-step-content">
+            <h4><a href="coach-your-team.html">How to Coach Your Team</a></h4>
+            <p>If the feedback conversation reveals a skill gap or a confidence issue, shift into coaching mode. Use the GROW model to help them find their own path forward.</p>
+            <div class="focus-on"><strong>Focus on:</strong> Asking, not telling. Your job is to unlock their thinking, not hand them the answer.</div>
+          </div>
+        </div>
+        <div class="path-step">
+          <div class="path-step-connector">
+            <div class="path-step-number">3</div>
+          </div>
+          <div class="path-step-content">
+            <h4><a href="accountability.html">How to Build Accountability</a></h4>
+            <p>If coaching doesn't shift things, the issue may be ownership. Use the Oz Principle to move from "Below the Line" blame to "Above the Line" action — for both of you.</p>
+            <div class="focus-on"><strong>Focus on:</strong> "See It, Own It, Solve It, Do It." If they can't get above the line after support, that's diagnostic information too.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="reality-check">
+        <h4>Reality check</h4>
+        <p>Sometimes underperformance isn't fixable. If you've been clear, coached, and given time — and nothing has changed — that's not a failure of your leadership. It's information. See <a href="problem-employee.html" style="color: #991b1b; text-decoration: underline;">How to Talk to a Problem Employee</a> and <a href="20-questions-firing.html" style="color: #991b1b; text-decoration: underline;">20 Questions Before Firing</a>.</p>
+      </div>
+    </div>
+
+    <!-- Path 2: Drowning -->
+    <div class="path-section" id="drowning">
+      <div class="path-header">
+        <div class="path-icon">🌊</div>
+        <div class="path-title">"I'm drowning in decisions and tasks"</div>
+      </div>
+      <p class="path-description">This is almost never a time management problem. It's a prioritisation and delegation problem. You're probably doing work that shouldn't be yours, saying yes to things that should be no, or making decisions that others could make.</p>
+      
+      <div class="diagnosis-box">
+        <h4>Ask yourself first</h4>
+        <ul>
+          <li>How many of the things on my plate actually require me specifically?</li>
+          <li>Am I holding onto tasks because I don't trust others to do them well enough?</li>
+          <li>When did I last say "no" to a request?</li>
+          <li>Am I confusing being busy with being effective?</li>
+        </ul>
+      </div>
+
+      <div class="path-steps">
+        <div class="path-step">
+          <div class="path-step-connector">
+            <div class="path-step-number">1</div>
+            <div class="path-step-line"></div>
+          </div>
+          <div class="path-step-content">
+            <h4><a href="prioritisation.html">Prioritisation & Trade-offs</a></h4>
+            <p>Use the Eisenhower Matrix to sort everything on your plate. Be honest about how much time you spend in Quadrant 1 (firefighting) vs. Quadrant 2 (building).</p>
+            <div class="focus-on"><strong>Focus on:</strong> What can you stop doing entirely? Every "yes" is an implicit "no" to something else. Make the trade-offs explicit.</div>
+          </div>
+        </div>
+        <div class="path-step">
+          <div class="path-step-connector">
+            <div class="path-step-number">2</div>
+            <div class="path-step-line"></div>
+          </div>
+          <div class="path-step-content">
+            <h4><a href="delegation-founders.html">Delegation for Founders</a></h4>
+            <p>Now hand things off. Not the scraps — the real work. Delegation isn't dumping; it's developing. Prepare, assign, monitor, evaluate.</p>
+            <div class="focus-on"><strong>Focus on:</strong> Delegating outcomes, not tasks. Give people the "what" and the "why," let them figure out the "how."</div>
+          </div>
+        </div>
+        <div class="path-step">
+          <div class="path-step-connector">
+            <div class="path-step-number">3</div>
+          </div>
+          <div class="path-step-content">
+            <h4><a href="decision-making.html">Decision-Making</a></h4>
+            <p>For the decisions that remain on your plate, use the RAPID® framework to clarify who recommends, who decides, and who executes. Stop being the bottleneck.</p>
+            <div class="focus-on"><strong>Focus on:</strong> Which decisions actually need you? Push decision authority down wherever possible.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="reality-check">
+        <h4>Reality check</h4>
+        <p>If you're drowning and you've already delegated and prioritised — the problem might be structural. You may need fewer initiatives, more headcount, or a fundamentally different operating model. Not every workload problem is solvable with better habits. See <a href="less-stressed-ceo.html" style="color: #991b1b; text-decoration: underline;">How to Be a Less Stressed CEO</a>.</p>
+      </div>
+    </div>
+
+    <!-- Path 3: Tension -->
+    <div class="path-section" id="tension">
+      <div class="path-header">
+        <div class="path-icon">⚡</div>
+        <div class="path-title">"There's tension between people on my team"</div>
+      </div>
+      <p class="path-description">Tension isn't always bad — healthy conflict drives better decisions. The question is whether this is productive disagreement or corrosive dysfunction. And whether you're part of the problem.</p>
+      
+      <div class="diagnosis-box">
+        <h4>Ask yourself first</h4>
+        <ul>
+          <li>Is this about ideas (healthy) or about people (toxic)?</li>
+          <li>Has this been building for weeks, or did something specific trigger it?</li>
+          <li>Have I inadvertently created the conditions for this conflict (unclear roles, competing incentives)?</li>
+          <li>Am I avoiding this conversation because it's uncomfortable?</li>
+        </ul>
+      </div>
+
+      <div class="path-steps">
+        <div class="path-step">
+          <div class="path-step-connector">
+            <div class="path-step-number">1</div>
+            <div class="path-step-line"></div>
+          </div>
+          <div class="path-step-content">
+            <h4><a href="conflict-resolution.html">Conflict Resolution</a></h4>
+            <p>Start with the structured approach: identify, understand perspectives, find common ground, brainstorm solutions, agree on a plan. Don't skip straight to solutions.</p>
+            <div class="focus-on"><strong>Focus on:</strong> Interests, not positions. What do both parties actually need? It's rarely what they're arguing about on the surface.</div>
+          </div>
+        </div>
+        <div class="path-step">
+          <div class="path-step-connector">
+            <div class="path-step-number">2</div>
+            <div class="path-step-line"></div>
+          </div>
+          <div class="path-step-content">
+            <h4><a href="5-dysfunctions.html">5 Dysfunctions of a Team</a></h4>
+            <p>If the tension is recurring, the root cause is likely deeper. Work through Lencioni's pyramid from the bottom up. Is there trust? Can people be vulnerable? Is conflict safe?</p>
+            <div class="focus-on"><strong>Focus on:</strong> The foundation layer — trust. Without it, everything above is theatre.</div>
+          </div>
+        </div>
+        <div class="path-step">
+          <div class="path-step-connector">
+            <div class="path-step-number">3</div>
+          </div>
+          <div class="path-step-content">
+            <h4><a href="4cs-communication.html">4C's Communication</a></h4>
+            <p>Once the immediate tension is addressed, build better communication habits to prevent recurrence. Clear, concise, correct, complete.</p>
+            <div class="focus-on"><strong>Focus on:</strong> Creating norms for how your team disagrees. Make conflict productive by making it safe and structured.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="reality-check">
+        <h4>Reality check</h4>
+        <p>Some interpersonal conflicts can't be resolved — only managed or separated. If two people are fundamentally incompatible and it's poisoning the team, restructuring may be kinder than endless mediation. Not every relationship is worth saving. See <a href="uncomfortable-truths.html" style="color: #991b1b; text-decoration: underline;">The Uncomfortable Truths</a>.</p>
+      </div>
+    </div>
+
+    <!-- Path 4: Letting Go -->
+    <div class="path-section" id="letting-go">
+      <div class="path-header">
+        <div class="path-icon">🚪</div>
+        <div class="path-title">"I think I need to let someone go"</div>
+      </div>
+      <p class="path-description">If you're thinking about it, you've probably been thinking about it for too long. The question isn't whether to act — it's whether you've done the work to act fairly, and whether you can live with the decision either way.</p>
+      
+      <div class="diagnosis-box">
+        <h4>Ask yourself first</h4>
+        <ul>
+          <li>Have I been clear about expectations, or have I been hoping they'd figure it out?</li>
+          <li>Is this a pattern, or a rough patch?</li>
+          <li>Would I hire this person again today, knowing what I know?</li>
+          <li>Am I delaying because of the team's needs, or because of my own discomfort?</li>
+        </ul>
+      </div>
+
+      <div class="path-steps">
+        <div class="path-step">
+          <div class="path-step-connector">
+            <div class="path-step-number">1</div>
+            <div class="path-step-line"></div>
+          </div>
+          <div class="path-step-content">
+            <h4><a href="problem-employee.html">How to Talk to a Problem Employee</a></h4>
+            <p>Before you decide, have the direct conversation. Address the behavior, explain the impact, listen to their perspective, and agree on a plan with clear expectations and consequences.</p>
+            <div class="focus-on"><strong>Focus on:</strong> Being specific and fair. Document everything. This conversation protects both of you.</div>
+          </div>
+        </div>
+        <div class="path-step">
+          <div class="path-step-connector">
+            <div class="path-step-number">2</div>
+            <div class="path-step-line"></div>
+          </div>
+          <div class="path-step-content">
+            <h4><a href="20-questions-firing.html">20 Questions Before Firing</a></h4>
+            <p>Work through the full checklist. Have you communicated expectations? Provided training? Given documented feedback? Explored alternative roles? Consulted HR?</p>
+            <div class="focus-on"><strong>Focus on:</strong> Due diligence. Not to delay the decision, but to make sure it's the right one — and that you can defend it.</div>
+          </div>
+        </div>
+        <div class="path-step">
+          <div class="path-step-connector">
+            <div class="path-step-number">3</div>
+          </div>
+          <div class="path-step-content">
+            <h4><a href="uncomfortable-truths.html">The Uncomfortable Truths</a></h4>
+            <p>Read this last. It won't make the decision easier, but it will make it clearer. Some people are in the wrong role. Some teams need different people. That's not cruelty — it's clarity.</p>
+            <div class="focus-on"><strong>Focus on:</strong> The cost of inaction. Keeping the wrong person hurts everyone — including them.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="reality-check">
+        <h4>Reality check</h4>
+        <p>The most common leadership failure here isn't firing too quickly — it's waiting too long. If you've done the work and the answer is clear, delaying is not kindness. It's avoidance. The rest of your team already knows.</p>
+      </div>
+    </div>
+
+    <!-- Path 5: Something's Off -->
+    <div class="path-section" id="something-off">
+      <div class="path-header">
+        <div class="path-icon">🔍</div>
+        <div class="path-title">"Something's off but I can't name it"</div>
+      </div>
+      <p class="path-description">This is the hardest one. No clear crisis, no obvious underperformer, no specific conflict — just a feeling that things aren't right. That feeling is usually correct. The challenge is figuring out what layer the problem lives on.</p>
+      
+      <div class="diagnosis-box">
+        <h4>Ask yourself first</h4>
+        <ul>
+          <li>Is the energy in the room different than it was three months ago?</li>
+          <li>Are people doing the work but not caring about it?</li>
+          <li>Am I the one who's changed, or has the team changed?</li>
+          <li>When did I last have a conversation that surprised me?</li>
+        </ul>
+      </div>
+
+      <div class="path-steps">
+        <div class="path-step">
+          <div class="path-step-connector">
+            <div class="path-step-number">1</div>
+            <div class="path-step-line"></div>
+          </div>
+          <div class="path-step-content">
+            <h4><a href="situational-leadership.html">Situational Leadership</a></h4>
+            <p>Start by re-diagnosing your team. Where is each person on the readiness scale? Has someone moved from R3 to R2 without you noticing? Is your style mismatched to what they need right now?</p>
+            <div class="focus-on"><strong>Focus on:</strong> The gap between your current leadership style and what the situation actually requires. The mismatch is often the source of the "off" feeling.</div>
+          </div>
+        </div>
+        <div class="path-step">
+          <div class="path-step-connector">
+            <div class="path-step-number">2</div>
+            <div class="path-step-line"></div>
+          </div>
+          <div class="path-step-content">
+            <h4><a href="start-with-why.html">Start With Why</a></h4>
+            <p>Go back to purpose. Has the "why" gotten lost in the daily grind? When people lose connection to meaning, performance doesn't collapse — it just slowly hollows out.</p>
+            <div class="focus-on"><strong>Focus on:</strong> When did you last talk about why the work matters — not what needs to get done, but why anyone should care?</div>
+          </div>
+        </div>
+        <div class="path-step">
+          <div class="path-step-connector">
+            <div class="path-step-number">3</div>
+          </div>
+          <div class="path-step-content">
+            <h4><a href="psychology-motivation.html">The Psychology of Motivation</a></h4>
+            <p>Check the fundamentals. Are people's basic needs met? Do they have autonomy, competence, and relatedness? Sometimes "something's off" means the hygiene factors have eroded without anyone noticing.</p>
+            <div class="focus-on"><strong>Focus on:</strong> The things people won't complain about directly — the slow erosion of trust, autonomy, or meaning that shows up as disengagement.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="reality-check">
+        <h4>Reality check</h4>
+        <p>Sometimes "something's off" is you. Leadership is exhausting, and burnout doesn't always look like burnout. Before diagnosing the team, check your own state. See <a href="less-stressed-ceo.html" style="color: #991b1b; text-decoration: underline;">How to Be a Less Stressed CEO</a> and <a href="better-breaks.html" style="color: #991b1b; text-decoration: underline;">How to Take Better Breaks</a>.</p>
+      </div>
+    </div>
+
+    <div class="key-takeaway">
+      <div class="key-takeaway-icon">💡</div>
+      <div>
+        <h3>Key Takeaway</h3>
+        <p><strong>Diagnosis before prescription.</strong> The biggest leadership mistake isn't using the wrong tool — it's reaching for a tool before understanding the problem. Slow down, ask the uncomfortable questions, and let the situation tell you what it needs. And remember: not every problem has a clean solution. Some situations require trade-offs, not fixes.</p>
+      </div>
+    </div>
+
+    <div class="further-reading">
+      <h3>📚 Further Reading</h3>
+      <ul>
+        <li>"The Coaching Habit" by Michael Bungay Stanier — for building a diagnostic mindset</li>
+        <li>"Leadership and Self-Deception" by The Arbinger Institute — for when you're part of the problem</li>
+        <li>"Turn the Ship Around!" by L. David Marquet — for redesigning the system, not just managing within it</li>
+        <li>"The Hard Thing About Hard Things" by Ben Horowitz — for when there's no good option</li>
+      </ul>
+    </div>
+  </div>
+
+  <nav class="module-nav">
+    <div class="module-nav-content">
+      <a href="stakeholder-management.html" class="nav-card"><div class="label">← Previous</div><div class="title">Stakeholder Management</div></a>
+      <a href="uncomfortable-truths.html" class="nav-card next"><div class="label">Next →</div><div class="title">The Uncomfortable Truths</div></a>
+    </div>
+  </nav>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-brand"><a href="https://listerdale.nl"><img src="../images/listerdale-logo.jpg" alt="Listerdale Life Sciences" class="footer-logo"></a><span class="footer-text">Listerdale Life Sciences</span></div>
+      <span class="footer-credit">Content adapted from VC Talent Lab</span>
+    </div>
+  </footer>
+</body>
+</html>
