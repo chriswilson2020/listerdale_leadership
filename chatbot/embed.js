@@ -7,6 +7,7 @@
     : "";
 
   var WIDGET_ID = "listerdale-chat-widget";
+  var W = "#" + WIDGET_ID;
 
   // Prevent double-loading
   if (document.getElementById(WIDGET_ID)) return;
@@ -53,7 +54,6 @@
         return r.json();
       })
       .then(function (data) {
-        // Update sessionId if server returns one (first message)
         if (data.sessionId) {
           sessionId = data.sessionId;
           localStorage.setItem("listerdale-chat-session", sessionId);
@@ -81,64 +81,62 @@
       .replace(/</g, "&lt;")
       .replace(/>/g, "&gt;");
 
-    // Links: [text](url)
     html = html.replace(
       /\[([^\]]+)\]\(([^)]+)\)/g,
-      '<a href="$2" target="_blank" rel="noopener noreferrer" style="color:#0088cc;text-decoration:underline;font-weight:500;">$1</a>'
+      '<a href="$2" target="_blank" rel="noopener noreferrer" style="color:#0088cc !important;text-decoration:underline !important;font-weight:500 !important;">$1</a>'
     );
-
-    // Bold: **text**
     html = html.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
-
-    // Italic: *text*
     html = html.replace(/\*([^*]+)\*/g, "<em>$1</em>");
-
-    // Line breaks
     html = html.replace(/\n\n/g, "</p><p>");
     html = html.replace(/\n/g, "<br>");
-
-    // Bullet lists
     html = html.replace(
       /(?:^|\<br\>)[-•]\s+(.+?)(?=(?:\<br\>[-•]|\<\/p\>|$))/g,
-      '<li style="margin:2px 0;margin-left:16px;list-style:disc;">$1</li>'
+      '<li style="margin:4px 0 4px 16px !important;padding:0 !important;list-style:disc;">$1</li>'
     );
 
     return "<p>" + html + "</p>";
   }
 
-  // ─── Styles (Listerdale Color Scheme) ─────────────────────────
+  // ─── Styles ───────────────────────────────────────────────────
+  // Every rule is scoped under #listerdale-chat-widget for high
+  // specificity so host-page CSS cannot override widget styles.
   var STYLES = `
-    #${WIDGET_ID}, #${WIDGET_ID} * { box-sizing: border-box; margin: 0; padding: 0; border: 0; font: inherit; vertical-align: baseline; }
-    #${WIDGET_ID} { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 14px; line-height: 1.5; color: #1e293b; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
-    #${WIDGET_ID} button { font-family: inherit; cursor: pointer; background: none; border: none; }
-    #${WIDGET_ID} textarea { font-family: inherit; }
-    #${WIDGET_ID} a { color: inherit; text-decoration: none; }
-    #${WIDGET_ID} p, #${WIDGET_ID} h4, #${WIDGET_ID} li, #${WIDGET_ID} span, #${WIDGET_ID} div { margin: 0; padding: 0; }
+    ${W} { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important; font-size: 14px !important; line-height: 1.5 !important; color: #1e293b !important; -webkit-font-smoothing: antialiased; }
 
-    .lsc-btn {
-      position: fixed; bottom: 24px; right: 24px; z-index: 99999;
-      display: flex; align-items: center; gap: 8px;
-      padding: 14px 20px; border-radius: 50px; border: none !important;
-      background: #1e293b; color: white; font-size: 14px; font-weight: 500;
-      cursor: pointer; box-shadow: 0 8px 30px rgba(30,41,59,0.3);
-      transition: all 0.2s ease; line-height: 1.5;
+    /* ── Floating Button ── */
+    ${W} .lsc-btn {
+      all: unset !important;
+      position: fixed !important; bottom: 24px !important; right: 24px !important; z-index: 99999 !important;
+      display: flex !important; align-items: center !important; gap: 8px !important;
+      padding: 14px 20px !important; border-radius: 50px !important;
+      background: #1e293b !important; color: #ffffff !important;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+      font-size: 14px !important; font-weight: 500 !important; line-height: 1.5 !important;
+      cursor: pointer !important; box-sizing: border-box !important;
+      box-shadow: 0 8px 30px rgba(30,41,59,0.3) !important;
+      transition: transform 0.2s ease, box-shadow 0.2s ease !important;
     }
-    .lsc-btn:hover { transform: scale(1.05); box-shadow: 0 12px 40px rgba(30,41,59,0.4); }
-    .lsc-btn svg { width: 20px; height: 20px; }
+    ${W} .lsc-btn:hover { transform: scale(1.05) !important; box-shadow: 0 12px 40px rgba(30,41,59,0.4) !important; }
+    ${W} .lsc-btn svg { width: 20px !important; height: 20px !important; display: block !important; fill: none !important; stroke: currentColor !important; }
 
-    .lsc-window {
-      position: fixed; bottom: 0; right: 0; z-index: 99999;
-      width: 100%; height: 100%;
-      display: flex; flex-direction: column;
-      background: white; overflow: hidden; color: #1e293b;
-      box-shadow: 0 25px 60px rgba(0,0,0,0.15);
-      animation: lsc-slide-up 0.3s ease;
+    /* ── Chat Window ── */
+    ${W} .lsc-window {
+      all: unset !important;
+      position: fixed !important; bottom: 0 !important; right: 0 !important; z-index: 99999 !important;
+      width: 100% !important; height: 100% !important;
+      display: flex !important; flex-direction: column !important;
+      background: #ffffff !important; color: #1e293b !important;
+      overflow: hidden !important; box-sizing: border-box !important;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+      font-size: 14px !important; line-height: 1.5 !important;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.15) !important;
+      animation: lsc-slide-up 0.3s ease !important;
     }
     @media (min-width: 640px) {
-      .lsc-window {
-        bottom: 24px; right: 24px;
-        width: 420px; height: 600px; max-height: 80vh;
-        border-radius: 16px; border: 1px solid #e2e8f0 !important;
+      ${W} .lsc-window {
+        bottom: 24px !important; right: 24px !important;
+        width: 420px !important; height: 600px !important; max-height: 80vh !important;
+        border-radius: 16px !important; border: 1px solid #e2e8f0 !important;
       }
     }
     @keyframes lsc-slide-up {
@@ -146,126 +144,152 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    .lsc-header {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 14px 20px; background: #1e293b; color: white;
-      flex-shrink: 0;
+    /* ── Header ── */
+    ${W} .lsc-header {
+      display: flex !important; align-items: center !important; justify-content: space-between !important;
+      padding: 14px 20px !important; background: #1e293b !important; color: #ffffff !important;
+      flex-shrink: 0 !important; box-sizing: border-box !important; margin: 0 !important;
     }
-    .lsc-header-left { display: flex; align-items: center; gap: 12px; }
-    .lsc-header-icon {
-      width: 36px; height: 36px; border-radius: 50%;
-      background: rgba(255,255,255,0.15);
-      display: flex; align-items: center; justify-content: center;
+    ${W} .lsc-header-left { display: flex !important; align-items: center !important; gap: 12px !important; margin: 0 !important; padding: 0 !important; }
+    ${W} .lsc-header-icon {
+      width: 36px !important; height: 36px !important; border-radius: 50% !important;
+      background: rgba(255,255,255,0.15) !important;
+      display: flex !important; align-items: center !important; justify-content: center !important;
+      margin: 0 !important; padding: 0 !important; flex-shrink: 0 !important;
     }
-    .lsc-header-icon svg { width: 20px; height: 20px; }
-    .lsc-header-title { font-size: 14px; font-weight: 600; }
-    .lsc-header-sub { font-size: 11px; opacity: 0.8; }
-    .lsc-header-actions { display: flex; gap: 4px; }
-    .lsc-header-actions button {
-      background: transparent; border: none !important; color: white; cursor: pointer;
-      padding: 8px; border-radius: 50%; transition: background 0.15s;
-      display: flex; align-items: center; justify-content: center;
+    ${W} .lsc-header-icon svg { width: 20px !important; height: 20px !important; display: block !important; fill: none !important; stroke: currentColor !important; }
+    ${W} .lsc-header-title { font-size: 14px !important; font-weight: 600 !important; color: #ffffff !important; margin: 0 !important; padding: 0 !important; line-height: 1.4 !important; }
+    ${W} .lsc-header-sub { font-size: 11px !important; opacity: 0.8 !important; color: #ffffff !important; margin: 0 !important; padding: 0 !important; line-height: 1.4 !important; }
+    ${W} .lsc-header-actions { display: flex !important; gap: 4px !important; margin: 0 !important; padding: 0 !important; }
+    ${W} .lsc-header-actions button {
+      all: unset !important;
+      background: transparent !important; color: #ffffff !important; cursor: pointer !important;
+      padding: 8px !important; border-radius: 50% !important; box-sizing: border-box !important;
+      display: flex !important; align-items: center !important; justify-content: center !important;
+      transition: background 0.15s !important;
     }
-    .lsc-header-actions button:hover { background: rgba(255,255,255,0.15); }
-    .lsc-header-actions button svg { width: 18px; height: 18px; }
+    ${W} .lsc-header-actions button:hover { background: rgba(255,255,255,0.15) !important; }
+    ${W} .lsc-header-actions button svg { width: 18px !important; height: 18px !important; display: block !important; fill: none !important; stroke: currentColor !important; }
 
-    .lsc-messages {
-      flex: 1; overflow-y: auto; padding: 16px;
-      display: flex; flex-direction: column; gap: 16px;
+    /* ── Messages Area ── */
+    ${W} .lsc-messages {
+      flex: 1 1 0% !important; overflow-y: auto !important; padding: 16px !important;
+      display: flex !important; flex-direction: column !important; gap: 16px !important;
+      margin: 0 !important; box-sizing: border-box !important; background: #ffffff !important;
     }
 
-    .lsc-empty {
-      display: flex; flex-direction: column; align-items: center;
-      justify-content: center; height: 100%; gap: 20px; padding: 8px;
+    /* ── Empty State ── */
+    ${W} .lsc-empty {
+      display: flex !important; flex-direction: column !important; align-items: center !important;
+      justify-content: center !important; height: 100% !important; gap: 20px !important;
+      padding: 8px !important; margin: 0 !important; box-sizing: border-box !important;
     }
-    .lsc-empty-icon {
-      width: 56px; height: 56px; border-radius: 50%;
-      background: rgba(0,136,204,0.1);
-      display: flex; align-items: center; justify-content: center;
+    ${W} .lsc-empty-icon {
+      width: 56px !important; height: 56px !important; border-radius: 50% !important;
+      background: rgba(0,136,204,0.1) !important;
+      display: flex !important; align-items: center !important; justify-content: center !important;
+      margin: 0 !important; padding: 0 !important;
     }
-    .lsc-empty-icon svg { width: 28px; height: 28px; color: #0088cc; }
-    .lsc-empty h4 { font-size: 16px; font-weight: 600; color: #1e293b; text-align: center; }
-    .lsc-empty p { font-size: 13px; color: #64748b; text-align: center; max-width: 280px; line-height: 1.6; }
+    ${W} .lsc-empty-icon svg { width: 28px !important; height: 28px !important; color: #0088cc !important; display: block !important; fill: none !important; stroke: currentColor !important; }
+    ${W} .lsc-empty h4 { font-size: 16px !important; font-weight: 600 !important; color: #1e293b !important; text-align: center !important; margin: 0 !important; padding: 0 !important; line-height: 1.4 !important; font-family: inherit !important; }
+    ${W} .lsc-empty p { font-size: 13px !important; color: #64748b !important; text-align: center !important; max-width: 280px !important; line-height: 1.6 !important; margin: 0 !important; padding: 0 !important; }
 
-    .lsc-suggestions { width: 100%; display: flex; flex-direction: column; gap: 8px; }
-    .lsc-suggestions-label { font-size: 11px; font-weight: 500; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em; padding: 0 4px; }
-    .lsc-suggest-btn {
-      width: 100%; display: flex; align-items: center; justify-content: space-between;
-      gap: 8px; padding: 10px 14px; border-radius: 8px; border: 1px solid #e2e8f0 !important;
-      background: white; cursor: pointer; font-size: 13px; color: #1e293b;
-      transition: all 0.15s; text-align: left; line-height: 1.5;
+    /* ── Suggestions ── */
+    ${W} .lsc-suggestions { width: 100% !important; display: flex !important; flex-direction: column !important; gap: 8px !important; margin: 0 !important; padding: 0 !important; }
+    ${W} .lsc-suggestions-label { font-size: 11px !important; font-weight: 500 !important; color: #94a3b8 !important; text-transform: uppercase !important; letter-spacing: 0.05em !important; padding: 0 4px !important; margin: 0 !important; line-height: 1.5 !important; }
+    ${W} .lsc-suggest-btn {
+      all: unset !important;
+      width: 100% !important; display: flex !important; align-items: center !important; justify-content: space-between !important;
+      gap: 8px !important; padding: 10px 14px !important; border-radius: 8px !important;
+      border: 1px solid #e2e8f0 !important; background: #ffffff !important;
+      cursor: pointer !important; font-size: 13px !important; color: #1e293b !important;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+      transition: background 0.15s, border-color 0.15s !important;
+      text-align: left !important; line-height: 1.5 !important; box-sizing: border-box !important;
     }
-    .lsc-suggest-btn:hover { background: #f0f7ff; border-color: rgba(0,136,204,0.3) !important; }
-    .lsc-suggest-btn svg { width: 14px; height: 14px; color: #94a3b8; flex-shrink: 0; }
-    .lsc-suggest-btn:hover svg { color: #0088cc; }
+    ${W} .lsc-suggest-btn:hover { background: #f0f7ff !important; border-color: rgba(0,136,204,0.3) !important; }
+    ${W} .lsc-suggest-btn svg { width: 14px !important; height: 14px !important; color: #94a3b8 !important; flex-shrink: 0 !important; display: block !important; fill: none !important; stroke: currentColor !important; }
+    ${W} .lsc-suggest-btn:hover svg { color: #0088cc !important; }
 
-    .lsc-msg { display: flex; gap: 10px; }
-    .lsc-msg-user { justify-content: flex-end; }
-    .lsc-msg-ai { justify-content: flex-start; }
+    /* ── Messages ── */
+    ${W} .lsc-msg { display: flex !important; gap: 10px !important; margin: 0 !important; padding: 0 !important; }
+    ${W} .lsc-msg-user { justify-content: flex-end !important; }
+    ${W} .lsc-msg-ai { justify-content: flex-start !important; }
 
-    .lsc-msg-avatar {
-      width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0; margin-top: 4px;
-      background: rgba(0,136,204,0.1);
-      display: flex; align-items: center; justify-content: center;
+    ${W} .lsc-msg-avatar {
+      width: 28px !important; height: 28px !important; border-radius: 50% !important; flex-shrink: 0 !important; margin-top: 4px !important;
+      background: rgba(0,136,204,0.1) !important;
+      display: flex !important; align-items: center !important; justify-content: center !important;
+      padding: 0 !important;
     }
-    .lsc-msg-avatar svg { width: 14px; height: 14px; color: #0088cc; }
+    ${W} .lsc-msg-avatar svg { width: 14px !important; height: 14px !important; color: #0088cc !important; display: block !important; fill: none !important; stroke: currentColor !important; }
 
-    .lsc-msg-bubble {
-      max-width: 82%; padding: 10px 14px; font-size: 14px; line-height: 1.6;
+    ${W} .lsc-msg-bubble {
+      max-width: 82% !important; padding: 10px 14px !important; font-size: 14px !important; line-height: 1.6 !important;
+      margin: 0 !important; box-sizing: border-box !important;
     }
-    .lsc-msg-user .lsc-msg-bubble {
-      background: #1e293b; color: white;
-      border-radius: 16px 16px 6px 16px;
-      border: none !important;
+    ${W} .lsc-msg-user .lsc-msg-bubble {
+      background: #1e293b !important; color: #ffffff !important;
+      border-radius: 16px 16px 6px 16px !important; border: none !important;
     }
-    .lsc-msg-ai .lsc-msg-bubble {
-      background: #f8fafc; color: #1e293b;
-      border-radius: 16px 16px 16px 6px;
-      border: none !important;
+    ${W} .lsc-msg-ai .lsc-msg-bubble {
+      background: #f8fafc !important; color: #1e293b !important;
+      border-radius: 16px 16px 16px 6px !important; border: none !important;
     }
-    .lsc-msg-ai .lsc-msg-bubble p { margin: 8px 0; }
-    .lsc-msg-ai .lsc-msg-bubble p:first-child { margin-top: 0; }
-    .lsc-msg-ai .lsc-msg-bubble p:last-child { margin-bottom: 0; }
-    .lsc-msg-ai .lsc-msg-bubble a { color: #0088cc; text-decoration: underline; font-weight: 500; }
-    .lsc-msg-ai .lsc-msg-bubble strong { font-weight: 600; }
-    .lsc-msg-ai .lsc-msg-bubble li { margin-left: 16px; margin-top: 4px; margin-bottom: 4px; }
+    ${W} .lsc-msg-ai .lsc-msg-bubble p { margin: 8px 0 !important; padding: 0 !important; font-size: 14px !important; line-height: 1.6 !important; }
+    ${W} .lsc-msg-ai .lsc-msg-bubble p:first-child { margin-top: 0 !important; }
+    ${W} .lsc-msg-ai .lsc-msg-bubble p:last-child { margin-bottom: 0 !important; }
+    ${W} .lsc-msg-ai .lsc-msg-bubble a { color: #0088cc !important; text-decoration: underline !important; font-weight: 500 !important; }
+    ${W} .lsc-msg-ai .lsc-msg-bubble strong { font-weight: 600 !important; }
+    ${W} .lsc-msg-ai .lsc-msg-bubble li { margin: 4px 0 4px 16px !important; padding: 0 !important; }
 
-    .lsc-typing { display: flex; gap: 6px; padding: 4px 0; }
-    .lsc-typing-dot {
-      width: 8px; height: 8px; border-radius: 50%;
-      background: #94a3b8; animation: lsc-bounce 1.4s infinite;
+    /* ── Typing Indicator ── */
+    ${W} .lsc-typing { display: flex !important; gap: 6px !important; padding: 4px 0 !important; margin: 0 !important; }
+    ${W} .lsc-typing-dot {
+      width: 8px !important; height: 8px !important; border-radius: 50% !important;
+      background: #94a3b8 !important; animation: lsc-bounce 1.4s infinite !important;
+      margin: 0 !important; padding: 0 !important;
     }
-    .lsc-typing-dot:nth-child(2) { animation-delay: 0.15s; }
-    .lsc-typing-dot:nth-child(3) { animation-delay: 0.3s; }
+    ${W} .lsc-typing-dot:nth-child(2) { animation-delay: 0.15s !important; }
+    ${W} .lsc-typing-dot:nth-child(3) { animation-delay: 0.3s !important; }
     @keyframes lsc-bounce {
       0%, 60%, 100% { transform: translateY(0); }
       30% { transform: translateY(-6px); }
     }
 
-    .lsc-input-area {
-      padding: 12px 16px; border-top: 1px solid #e2e8f0 !important; background: white;
-      flex-shrink: 0;
+    /* ── Input Area ── */
+    ${W} .lsc-input-area {
+      padding: 12px 16px !important; border-top: 1px solid #e2e8f0 !important; background: #ffffff !important;
+      flex-shrink: 0 !important; margin: 0 !important; box-sizing: border-box !important;
     }
-    .lsc-input-form { display: flex; align-items: flex-end; gap: 8px; }
-    .lsc-input-form textarea {
-      flex: 1; resize: none; border: 1px solid #e2e8f0 !important; border-radius: 12px;
-      padding: 10px 14px; font-size: 14px; font-family: inherit;
-      min-height: 42px; max-height: 100px; outline: none; line-height: 1.5;
-      transition: border-color 0.15s, box-shadow 0.15s; background: white; color: #1e293b;
+    ${W} .lsc-input-form { display: flex !important; align-items: flex-end !important; gap: 8px !important; margin: 0 !important; padding: 0 !important; }
+    ${W} .lsc-input-form textarea {
+      all: unset !important;
+      flex: 1 1 0% !important; resize: none !important;
+      border: 1px solid #e2e8f0 !important; border-radius: 12px !important;
+      padding: 10px 14px !important; font-size: 14px !important;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+      min-height: 42px !important; max-height: 100px !important;
+      line-height: 1.5 !important; background: #ffffff !important; color: #1e293b !important;
+      box-sizing: border-box !important; display: block !important;
+      transition: border-color 0.15s, box-shadow 0.15s !important;
     }
-    .lsc-input-form textarea:focus { border-color: #0088cc !important; box-shadow: 0 0 0 3px rgba(0,136,204,0.1); }
-    .lsc-input-form textarea::placeholder { color: #94a3b8; }
-    .lsc-send-btn {
-      flex-shrink: 0; width: 40px; height: 40px; border-radius: 12px;
-      background: #0088cc !important; color: white; border: none !important; cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      transition: background 0.15s;
+    ${W} .lsc-input-form textarea:focus { border-color: #0088cc !important; box-shadow: 0 0 0 3px rgba(0,136,204,0.1) !important; outline: none !important; }
+    ${W} .lsc-input-form textarea::placeholder { color: #94a3b8 !important; }
+    ${W} .lsc-send-btn {
+      all: unset !important;
+      flex-shrink: 0 !important; width: 40px !important; height: 40px !important; border-radius: 12px !important;
+      background: #0088cc !important; color: #ffffff !important; cursor: pointer !important;
+      display: flex !important; align-items: center !important; justify-content: center !important;
+      box-sizing: border-box !important;
+      transition: background 0.15s !important;
     }
-    .lsc-send-btn:hover { background: #0077b3 !important; }
-    .lsc-send-btn:disabled { opacity: 0.4; cursor: not-allowed; }
-    .lsc-send-btn svg { width: 16px; height: 16px; }
+    ${W} .lsc-send-btn:hover { background: #0077b3 !important; }
+    ${W} .lsc-send-btn:disabled { opacity: 0.4 !important; cursor: not-allowed !important; }
+    ${W} .lsc-send-btn svg { width: 16px !important; height: 16px !important; display: block !important; fill: none !important; stroke: currentColor !important; }
 
-    .lsc-footer { text-align: center; padding: 8px 0 2px; font-size: 10px; color: #94a3b8; opacity: 0.6; }
+    /* ── Footer ── */
+    ${W} .lsc-footer { text-align: center !important; padding: 8px 0 2px !important; font-size: 10px !important; color: #94a3b8 !important; opacity: 0.6 !important; margin: 0 !important; }
   `;
 
   // ─── SVG Icons ────────────────────────────────────────────────
@@ -456,6 +480,14 @@
   };
 
   // ─── Initialize ───────────────────────────────────────────────
+  // Load Inter font if not already present
+  if (!document.querySelector('link[href*="fonts.googleapis.com/css2?family=Inter"]')) {
+    var fontLink = document.createElement("link");
+    fontLink.rel = "stylesheet";
+    fontLink.href = "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap";
+    document.head.appendChild(fontLink);
+  }
+
   var style = document.createElement("style");
   style.textContent = STYLES;
   document.head.appendChild(style);
