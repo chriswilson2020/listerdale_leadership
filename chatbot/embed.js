@@ -108,16 +108,20 @@
 
   // ─── Styles (Listerdale Color Scheme) ─────────────────────────
   var STYLES = `
-    #${WIDGET_ID} * { box-sizing: border-box; margin: 0; padding: 0; }
-    #${WIDGET_ID} { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 14px; line-height: 1.5; }
+    #${WIDGET_ID}, #${WIDGET_ID} * { box-sizing: border-box; margin: 0; padding: 0; border: 0; font: inherit; vertical-align: baseline; }
+    #${WIDGET_ID} { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 14px; line-height: 1.5; color: #1e293b; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    #${WIDGET_ID} button { font-family: inherit; cursor: pointer; background: none; border: none; }
+    #${WIDGET_ID} textarea { font-family: inherit; }
+    #${WIDGET_ID} a { color: inherit; text-decoration: none; }
+    #${WIDGET_ID} p, #${WIDGET_ID} h4, #${WIDGET_ID} li, #${WIDGET_ID} span, #${WIDGET_ID} div { margin: 0; padding: 0; }
 
     .lsc-btn {
       position: fixed; bottom: 24px; right: 24px; z-index: 99999;
       display: flex; align-items: center; gap: 8px;
-      padding: 14px 20px; border-radius: 50px; border: none;
+      padding: 14px 20px; border-radius: 50px; border: none !important;
       background: #1e293b; color: white; font-size: 14px; font-weight: 500;
       cursor: pointer; box-shadow: 0 8px 30px rgba(30,41,59,0.3);
-      transition: all 0.2s ease;
+      transition: all 0.2s ease; line-height: 1.5;
     }
     .lsc-btn:hover { transform: scale(1.05); box-shadow: 0 12px 40px rgba(30,41,59,0.4); }
     .lsc-btn svg { width: 20px; height: 20px; }
@@ -126,7 +130,7 @@
       position: fixed; bottom: 0; right: 0; z-index: 99999;
       width: 100%; height: 100%;
       display: flex; flex-direction: column;
-      background: white; overflow: hidden;
+      background: white; overflow: hidden; color: #1e293b;
       box-shadow: 0 25px 60px rgba(0,0,0,0.15);
       animation: lsc-slide-up 0.3s ease;
     }
@@ -134,7 +138,7 @@
       .lsc-window {
         bottom: 24px; right: 24px;
         width: 420px; height: 600px; max-height: 80vh;
-        border-radius: 16px; border: 1px solid #e2e8f0;
+        border-radius: 16px; border: 1px solid #e2e8f0 !important;
       }
     }
     @keyframes lsc-slide-up {
@@ -145,6 +149,7 @@
     .lsc-header {
       display: flex; align-items: center; justify-content: space-between;
       padding: 14px 20px; background: #1e293b; color: white;
+      flex-shrink: 0;
     }
     .lsc-header-left { display: flex; align-items: center; gap: 12px; }
     .lsc-header-icon {
@@ -157,20 +162,21 @@
     .lsc-header-sub { font-size: 11px; opacity: 0.8; }
     .lsc-header-actions { display: flex; gap: 4px; }
     .lsc-header-actions button {
-      background: none; border: none; color: white; cursor: pointer;
+      background: transparent; border: none !important; color: white; cursor: pointer;
       padding: 8px; border-radius: 50%; transition: background 0.15s;
+      display: flex; align-items: center; justify-content: center;
     }
     .lsc-header-actions button:hover { background: rgba(255,255,255,0.15); }
     .lsc-header-actions button svg { width: 18px; height: 18px; }
 
     .lsc-messages {
       flex: 1; overflow-y: auto; padding: 16px;
-      display: flex; flex-direction: column; gap: 12px;
+      display: flex; flex-direction: column; gap: 16px;
     }
 
     .lsc-empty {
       display: flex; flex-direction: column; align-items: center;
-      justify-content: center; height: 100%; gap: 20px; padding: 16px;
+      justify-content: center; height: 100%; gap: 20px; padding: 8px;
     }
     .lsc-empty-icon {
       width: 56px; height: 56px; border-radius: 50%;
@@ -181,19 +187,19 @@
     .lsc-empty h4 { font-size: 16px; font-weight: 600; color: #1e293b; text-align: center; }
     .lsc-empty p { font-size: 13px; color: #64748b; text-align: center; max-width: 280px; line-height: 1.6; }
 
-    .lsc-suggestions { width: 100%; display: flex; flex-direction: column; gap: 6px; }
+    .lsc-suggestions { width: 100%; display: flex; flex-direction: column; gap: 8px; }
     .lsc-suggestions-label { font-size: 11px; font-weight: 500; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em; padding: 0 4px; }
     .lsc-suggest-btn {
       width: 100%; display: flex; align-items: center; justify-content: space-between;
-      padding: 10px 14px; border-radius: 10px; border: 1px solid #e2e8f0;
+      gap: 8px; padding: 10px 14px; border-radius: 8px; border: 1px solid #e2e8f0 !important;
       background: white; cursor: pointer; font-size: 13px; color: #1e293b;
-      transition: all 0.15s; text-align: left;
+      transition: all 0.15s; text-align: left; line-height: 1.5;
     }
-    .lsc-suggest-btn:hover { background: #f0f7ff; border-color: rgba(0,136,204,0.3); }
+    .lsc-suggest-btn:hover { background: #f0f7ff; border-color: rgba(0,136,204,0.3) !important; }
     .lsc-suggest-btn svg { width: 14px; height: 14px; color: #94a3b8; flex-shrink: 0; }
     .lsc-suggest-btn:hover svg { color: #0088cc; }
 
-    .lsc-msg { display: flex; gap: 8px; }
+    .lsc-msg { display: flex; gap: 10px; }
     .lsc-msg-user { justify-content: flex-end; }
     .lsc-msg-ai { justify-content: flex-start; }
 
@@ -205,22 +211,24 @@
     .lsc-msg-avatar svg { width: 14px; height: 14px; color: #0088cc; }
 
     .lsc-msg-bubble {
-      max-width: 82%; padding: 10px 14px; font-size: 13px; line-height: 1.6;
+      max-width: 82%; padding: 10px 14px; font-size: 14px; line-height: 1.6;
     }
     .lsc-msg-user .lsc-msg-bubble {
       background: #1e293b; color: white;
       border-radius: 16px 16px 6px 16px;
+      border: none !important;
     }
     .lsc-msg-ai .lsc-msg-bubble {
       background: #f8fafc; color: #1e293b;
       border-radius: 16px 16px 16px 6px;
+      border: none !important;
     }
-    .lsc-msg-ai .lsc-msg-bubble p { margin: 6px 0; }
+    .lsc-msg-ai .lsc-msg-bubble p { margin: 8px 0; }
     .lsc-msg-ai .lsc-msg-bubble p:first-child { margin-top: 0; }
     .lsc-msg-ai .lsc-msg-bubble p:last-child { margin-bottom: 0; }
     .lsc-msg-ai .lsc-msg-bubble a { color: #0088cc; text-decoration: underline; font-weight: 500; }
     .lsc-msg-ai .lsc-msg-bubble strong { font-weight: 600; }
-    .lsc-msg-ai .lsc-msg-bubble li { margin-left: 16px; }
+    .lsc-msg-ai .lsc-msg-bubble li { margin-left: 16px; margin-top: 4px; margin-bottom: 4px; }
 
     .lsc-typing { display: flex; gap: 6px; padding: 4px 0; }
     .lsc-typing-dot {
@@ -235,28 +243,29 @@
     }
 
     .lsc-input-area {
-      padding: 12px 16px; border-top: 1px solid #e2e8f0; background: white;
+      padding: 12px 16px; border-top: 1px solid #e2e8f0 !important; background: white;
+      flex-shrink: 0;
     }
     .lsc-input-form { display: flex; align-items: flex-end; gap: 8px; }
     .lsc-input-form textarea {
-      flex: 1; resize: none; border: 1px solid #e2e8f0; border-radius: 12px;
-      padding: 10px 14px; font-size: 13px; font-family: inherit;
-      min-height: 40px; max-height: 100px; outline: none;
-      transition: border-color 0.15s, box-shadow 0.15s;
+      flex: 1; resize: none; border: 1px solid #e2e8f0 !important; border-radius: 12px;
+      padding: 10px 14px; font-size: 14px; font-family: inherit;
+      min-height: 42px; max-height: 100px; outline: none; line-height: 1.5;
+      transition: border-color 0.15s, box-shadow 0.15s; background: white; color: #1e293b;
     }
-    .lsc-input-form textarea:focus { border-color: #0088cc; box-shadow: 0 0 0 3px rgba(0,136,204,0.1); }
+    .lsc-input-form textarea:focus { border-color: #0088cc !important; box-shadow: 0 0 0 3px rgba(0,136,204,0.1); }
     .lsc-input-form textarea::placeholder { color: #94a3b8; }
     .lsc-send-btn {
       flex-shrink: 0; width: 40px; height: 40px; border-radius: 12px;
-      background: #0088cc; color: white; border: none; cursor: pointer;
+      background: #0088cc !important; color: white; border: none !important; cursor: pointer;
       display: flex; align-items: center; justify-content: center;
       transition: background 0.15s;
     }
-    .lsc-send-btn:hover { background: #0077b3; }
+    .lsc-send-btn:hover { background: #0077b3 !important; }
     .lsc-send-btn:disabled { opacity: 0.4; cursor: not-allowed; }
     .lsc-send-btn svg { width: 16px; height: 16px; }
 
-    .lsc-footer { text-align: center; padding: 6px 0 2px; font-size: 10px; color: #94a3b8; }
+    .lsc-footer { text-align: center; padding: 8px 0 2px; font-size: 10px; color: #94a3b8; opacity: 0.6; }
   `;
 
   // ─── SVG Icons ────────────────────────────────────────────────
